@@ -23,29 +23,29 @@ function getColor(value) {
 
 function createMarkerGroup(myData) {
 
-let circleMarkers = []
+    let circleMarkers = []
 
-myData.forEach(element => {
-    let lat = element['geometry']['coordinates'][1]
-    let lng = element['geometry']['coordinates'][0]
-    let depth = element['geometry']['coordinates'][2]
-    let magnitude = element['properties']['mag']
-    let place = element['properties']['place']
-    
+    myData.forEach(element => {
+        let lat = element['geometry']['coordinates'][1]
+        let lng = element['geometry']['coordinates'][0]
+        let depth = element['geometry']['coordinates'][2]
+        let magnitude = element['properties']['mag']
+        let place = element['properties']['place']
+        
 
-    let circle = L.circle([lat, lng], {
-        color: 'rgb(217,217,217',
-        weight: 1,
-        fillColor: getColor(depth),
-        fillOpacity: 0.7,
-        radius: magnitude * 20000
-    }).addTo(myMap);
+        let circle = L.circle([lat, lng], {
+            color: 'rgb(217,217,217',
+            weight: 1,
+            fillColor: getColor(depth),
+            fillOpacity: 0.7,
+            radius: magnitude * 20000
+        });
 
-    circle.bindPopup(`magnitude: ${magnitude}<br> location: ${place}<br> depth: ${depth} `)   
-    circleMarkers.push(circle)
+        circle.bindPopup(`magnitude: ${magnitude}<br> location: ${place}<br> depth: ${depth} `)   
+        circleMarkers.push(circle)
+    })
 
- return L.layerGroup(circleMarkers)
-})
+    return L.layerGroup(circleMarkers)
 }
 
 
@@ -109,11 +109,11 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
     let myMap = L.map('map', {
         center: [39.8283, -98.5795],
-        zoom: 5, 
+        zoom: 4, 
         layers: [googleSatelliteMap, earthquakeMarkers, tectonicPolyLines]
     })
 
-    L.control.layers(baseLayer, overlayLayer).addto(myMap);
+    L.control.layers(baseLayer, overlayLayer).addTo(myMap);
 
     // Creating a custom legend control to add legend to the map
 
