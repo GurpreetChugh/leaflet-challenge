@@ -49,40 +49,13 @@ function createMarkerGroup(myData) {
 }
 
 
-// Fetching earthquake data
+
+
+// Fetching earthquake and tectonic plates data
 
 d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geojson").then(data => {
     console.log(data)
     let earthquakeData = data['features']
-
-   
-    // definoing base tiles
-
-    var googleSatelliteMap = L.tileLayer('https://mt{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}&hl={language}', {
-        attribution: 'Map data &copy;2023 Google',
-        subdomains: '0123',
-        maxZoom: 22,
-        language: 'en'
-    });
-    
-    var grayscale  = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      id: 'mapbox.light' // Optional ID for attribution purposes
-    });
-    
-    var outdoors = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      id: 'mapbox.outdoors' // Optional ID for attribution purposes
-    });
-    
-    let baseLayer = {
-        'Satellite':googleSatelliteMap,
-        'Grayscale': grayscale,
-        'Outdoors': outdoors
-    };
-
 
     var tectonicPlates = tectonicData['features'];
 
@@ -96,10 +69,35 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
         }
     })
 
-    
-    // invoking createMarker function
-    let earthquakeMarkers = createMarkerGroup(earthquakeData)
+   // invoking createMarkerGroup function to return earthquake layer group
+   let earthquakeMarkers = createMarkerGroup(earthquakeData)
 
+    // defining base tiles
+
+    let googleSatelliteMap = L.tileLayer('https://mt{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}&hl={language}', {
+        attribution: 'Map data &copy;2023 Google',
+        subdomains: '0123',
+        maxZoom: 22,
+        language: 'en'
+    });
+
+    let USGS_USTopo = L.tileLayer('https://basemap.nationalmap.gov/arcgis/rest/services/USGSTopo/MapServer/tile/{z}/{y}/{x}', {
+	maxZoom: 20,
+	attribution: 'Tiles courtesy of the <a href="https://usgs.gov/">U.S. Geological Survey</a>'
+    });
+
+    let street = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    });
+    
+    
+    let baseLayer = {
+        'Satellite':googleSatelliteMap,
+        'USGS Topo': USGS_USTopo,
+        'Street': street 
+    }; 
+    
     let overlayLayer = {
         'Earthquakes' : earthquakeMarkers,
         'Tectonic Plates': tectonicPolyLines
