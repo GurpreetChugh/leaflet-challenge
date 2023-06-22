@@ -8,6 +8,8 @@
 
    - When you click a dataset (such as "All Earthquakes from the Past 7 Days"), you will be given a JSON representation of that data. Use the URL of this JSON to pull in the data for the visualization. 
 
+   ![Basic Map](Images/BasicMap.png)
+
 2. Import and visualize the data by doing the following:
 
    - Using Leaflet, create a map that plots all the earthquakes from your dataset based on their longitude and latitude.
