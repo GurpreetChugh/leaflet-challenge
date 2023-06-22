@@ -41,7 +41,7 @@ function createMarkerGroup(myData) {
             radius: magnitude * 20000
         });
 
-        circle.bindPopup(`magnitude: ${magnitude}<br> location: ${place}<br> depth: ${depth} `)   
+        circle.bindTooltip(`magnitude: ${magnitude}<br> location: ${place}<br> depth: ${depth} `) 
         circleMarkers.push(circle)
     })
 

@@ -6,7 +6,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
     let myMap = L.map('map', {
         center: [39.8283, -98.5795],
-        zoom: 6
+        zoom: 5
     })
 
     let street = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -50,7 +50,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
             radius: magnitude * 20000
         }).addTo(myMap);
 
-      circle.bindPopup(`magnitude: ${magnitude}<br> location: ${place}<br> depth: ${depth} `)                
+        circle.bindTooltip(`magnitude: ${magnitude}<br> location: ${place}<br> depth: ${depth} `);             
     });
 
     // Creating a custom legend control to add legend to the map
