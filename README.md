@@ -1,8 +1,8 @@
-# leaflet-challenge
+# Leaflet-challenge
  
-##Part 1: Create the Earthquake Visualization
+## Part 1: Create the Earthquake Visualization
 
-1.Get your dataset. To do so, follow these steps:
+1. Get your dataset. To do so, follow these steps:
 
 - The USGS provides earthquake data in a number of different formats, updated every 5 minutes. Visit the `USGS GeoJSON FeedLinks` to an external site. page and choose a dataset to visualize. 
 
@@ -21,7 +21,7 @@
 - Create a legend that will provide context for your map data.
 
 
-##Part 2: Gather and Plot More Data
+## Part 2: Gather and Plot More Data
 
 Plot a second dataset on your map to illustrate the relationship between tectonic plates and seismic activity. You will need to pull in this dataset and visualize it alongside your original data. Data on tectonic plates can be found at [https://github.com/fraxen/tectonicplates](https://github.com/fraxen/tectonicplates).
 
